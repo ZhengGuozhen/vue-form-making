@@ -37,8 +37,8 @@ export default {
         title: '布局字段',
       },
       // @zgz
-      zgz: {
-        title: 'XX组件',
+      demo: {
+        title: 'Demo组件',
       }
     },
     description: {

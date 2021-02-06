@@ -61,17 +61,16 @@
               </template>
               
               <!-- @zgz -->
-              <!-- ...Fields 在这里是冗余的 -->
-              <template>
-                <div class="widget-cate">{{$t('fm.components.zgz.title')}}</div>
-                <draggable tag="ul" :list="zgzComponents" 
+              <template v-if="demoFields.length">
+                <div class="widget-cate">{{$t('fm.components.demo.title')}}</div>
+                <draggable tag="ul" :list="demoComponents" 
                   v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
                   @end="handleMoveEnd"
                   @start="handleMoveStart"
                   :move="handleMove"
                 >
                   
-                  <li class="form-edit-widget-label" :class="{'no-put': item.type == 'divider'}" v-for="(item, index) in zgzComponents" :key="index">
+                  <li v-if="demoFields.indexOf(item.type) >=0" class="form-edit-widget-label" :class="{'no-put': item.type == 'divider'}" v-for="(item, index) in demoComponents" :key="index">
                     <a>
                       <i class="icon iconfont" :class="item.icon"></i>
                       <span>{{item.name}}</span>
@@ -194,7 +193,7 @@ import CusDialog from './CusDialog'
 import GenerateForm from './GenerateForm'
 import Clipboard from 'clipboard'
 import {basicComponents, layoutComponents, advanceComponents} from './componentsConfig.js'
-import {zgzComponents} from './componentsConfig.js'// @zgz
+import {demoComponents} from './componentsConfig.js'// @zgz
 import {loadJs, loadCss} from '../util/index.js'
 import request from '../util/request.js'
 import generateCode from './generateCode.js'
@@ -243,18 +242,18 @@ export default {
       default: () => ['grid']
     },
     // @zgz
-    // ...Fields 在这里是冗余的
-    // zgzFields: {
-    //   type: Array,
-    //   default: () => ['zgz001']
-    // }
+    // 不在 demoFields 中列出的组件会被隐藏
+    demoFields: {
+      type: Array,
+      default: () => ['zgz001']
+    }
   },
   data () {
     return {
       basicComponents,
       layoutComponents,
       advanceComponents,
-      zgzComponents,// @zgz
+      demoComponents,// @zgz
       resetJson: false,
       widgetForm: {
         list: [],
@@ -334,7 +333,7 @@ export default {
         }
       })
       // @zgz
-      this.zgzComponents = this.zgzComponents.map(item => {
+      this.demoComponents = this.demoComponents.map(item => {
         return {
           ...item,
           name: this.$t(`fm.components.fields.${item.type}`)

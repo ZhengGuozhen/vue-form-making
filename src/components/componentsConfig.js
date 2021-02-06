@@ -309,7 +309,7 @@ export const layoutComponents = [
 ]
 
 // @zgz
-export const zgzComponents = [
+export const demoComponents = [
   {
     type: 'zgz001',// 组件类型，保持唯一
     icon: 'icon-input',
