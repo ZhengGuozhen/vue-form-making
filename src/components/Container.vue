@@ -60,6 +60,24 @@
                 </draggable>
               </template>
               
+              <!-- @zgz -->
+              <template v-if="zgzFields.length">
+                <div class="widget-cate">{{$t('fm.components.zgz.title')}}</div>
+                <draggable tag="ul" :list="zgzComponents" 
+                  v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
+                  @end="handleMoveEnd"
+                  @start="handleMoveStart"
+                  :move="handleMove"
+                >
+                  
+                  <li v-if="zgzFields.indexOf(item.type)>=0" class="form-edit-widget-label" :class="{'no-put': item.type == 'divider'}" v-for="(item, index) in zgzComponents" :key="index">
+                    <a>
+                      <i class="icon iconfont" :class="item.icon"></i>
+                      <span>{{item.name}}</span>
+                    </a>
+                  </li>
+                </draggable>
+              </template>
             </div>
             
           </el-aside>
@@ -175,6 +193,7 @@ import CusDialog from './CusDialog'
 import GenerateForm from './GenerateForm'
 import Clipboard from 'clipboard'
 import {basicComponents, layoutComponents, advanceComponents} from './componentsConfig.js'
+import {zgzComponents} from './componentsConfig.js'// @zgz
 import {loadJs, loadCss} from '../util/index.js'
 import request from '../util/request.js'
 import generateCode from './generateCode.js'
@@ -221,6 +240,11 @@ export default {
     layoutFields: {
       type: Array,
       default: () => ['grid']
+    },
+    // @zgz
+    zgzFields: {
+      type: Array,
+      default: () => ['zgz001']
     }
   },
   data () {
@@ -228,6 +252,7 @@ export default {
       basicComponents,
       layoutComponents,
       advanceComponents,
+      zgzComponents,// @zgz
       resetJson: false,
       widgetForm: {
         list: [],
@@ -301,6 +326,13 @@ export default {
         }
       })
       this.layoutComponents = this.layoutComponents.map(item => {
+        return {
+          ...item,
+          name: this.$t(`fm.components.fields.${item.type}`)
+        }
+      })
+      // @zgz
+      this.zgzComponents = this.zgzComponents.map(item => {
         return {
           ...item,
           name: this.$t(`fm.components.fields.${item.type}`)

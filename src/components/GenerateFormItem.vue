@@ -202,6 +202,12 @@
     <template v-if="widget.type == 'text'">
       <span>{{dataModel}}</span>
     </template>
+
+    <!-- @zgz -->
+    <template v-if="widget.type == 'zgz001'">
+      <span>{{widget.options.defaultValue}}</span>
+    </template>
+
   </el-form-item>
 </template>
 

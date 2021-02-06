@@ -23,7 +23,9 @@ export default {
         table: '子表单',
         grid: '栅格布局',
         tabs: '标签页',
-        divider: '分割线'
+        divider: '分割线',
+        // @zgz
+        zgz001: 'zgz001'
       },
       basic: {
         title: '基础字段',
@@ -33,6 +35,10 @@ export default {
       },
       layout: {
         title: '布局字段',
+      },
+      // @zgz
+      zgz: {
+        title: 'XX组件',
       }
     },
     description: {

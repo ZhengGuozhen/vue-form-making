@@ -197,6 +197,11 @@
           <i class="iconfont icon-drag drag-widget"></i>
         </div>
         
+        <!-- @zgz -->
+        <template v-if="element.type == 'zgz001'">
+          <span>{{element.options.defaultValue}}</span>
+        </template>
+
     </el-form-item>
 </template>
 
