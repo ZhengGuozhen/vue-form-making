@@ -61,7 +61,8 @@
               </template>
               
               <!-- @zgz -->
-              <template v-if="zgzFields.length">
+              <!-- ...Fields 在这里是冗余的 -->
+              <template>
                 <div class="widget-cate">{{$t('fm.components.zgz.title')}}</div>
                 <draggable tag="ul" :list="zgzComponents" 
                   v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
@@ -70,7 +71,7 @@
                   :move="handleMove"
                 >
                   
-                  <li v-if="zgzFields.indexOf(item.type)>=0" class="form-edit-widget-label" :class="{'no-put': item.type == 'divider'}" v-for="(item, index) in zgzComponents" :key="index">
+                  <li class="form-edit-widget-label" :class="{'no-put': item.type == 'divider'}" v-for="(item, index) in zgzComponents" :key="index">
                     <a>
                       <i class="icon iconfont" :class="item.icon"></i>
                       <span>{{item.name}}</span>
@@ -242,10 +243,11 @@ export default {
       default: () => ['grid']
     },
     // @zgz
-    zgzFields: {
-      type: Array,
-      default: () => ['zgz001']
-    }
+    // ...Fields 在这里是冗余的
+    // zgzFields: {
+    //   type: Array,
+    //   default: () => ['zgz001']
+    // }
   },
   data () {
     return {
